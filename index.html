@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>MP4 转 MP3</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><i data-lucide="audio-lines"></i></span>
+        <div>
+          <h1>MP4 转 MP3</h1>
+          <p class="subtitle">浏览器本地转换</p>
+        </div>
+      </div>
+      <span class="edge-badge"><i data-lucide="monitor" aria-hidden="true"></i> Edge</span>
+    </header>
+
+    <main class="app">
+      <section id="dropZone" class="drop-zone" tabindex="0" aria-label="选择 MP4 文件">
+        <span class="drop-icon" aria-hidden="true"><i data-lucide="file-up"></i></span>
+        <strong id="dropTitle">选择 MP4 文件</strong>
+        <button type="button" id="browseBtn" class="browse-button">
+          <i data-lucide="folder-open" aria-hidden="true"></i>
+          <span>浏览文件</span>
+        </button>
+        <input id="fileInput" type="file" accept=".mp4,.m4a,video/mp4,audio/mp4" hidden>
+      </section>
+
+      <section id="workPanel" class="work-panel" hidden>
+        <div class="file-row">
+          <span class="file-badge" aria-hidden="true"><i data-lucide="file-video"></i></span>
+          <div class="file-details">
+            <strong id="fileName">-</strong>
+            <span id="fileMeta">-</span>
+          </div>
+          <button type="button" id="resetBtn" class="icon-text-button">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+            <span>重新选择</span>
+          </button>
+        </div>
+
+        <div class="settings-row">
+          <div class="bitrate-group" role="group" aria-label="MP3 码率">
+            <button type="button" class="bitrate-option is-active" data-bitrate="128" aria-pressed="true">128 kbps</button>
+            <button type="button" class="bitrate-option" data-bitrate="192" aria-pressed="false">192 kbps</button>
+            <button type="button" class="bitrate-option" data-bitrate="320" aria-pressed="false">320 kbps</button>
+          </div>
+          <button type="button" id="convertBtn" class="primary-button" disabled>
+            <i data-lucide="play" aria-hidden="true"></i>
+            <span>开始转换</span>
+          </button>
+        </div>
+
+        <div id="progressPanel" class="progress-panel" hidden>
+          <div class="progress-head">
+            <span id="progressLabel">准备中</span>
+            <span id="progressValue">0%</span>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+          <div id="waveformWrap" class="waveform-wrap" hidden>
+            <canvas id="waveform" aria-hidden="true"></canvas>
+          </div>
+        </div>
+
+        <div id="resultPanel" class="result-panel" hidden>
+          <div class="result-head">
+            <div class="result-title">
+              <span class="result-label">MP3</span>
+              <strong id="resultName">-</strong>
+            </div>
+            <span id="resultMeta">-</span>
+          </div>
+          <div class="audio-wrap">
+            <audio id="audioPreview" controls preload="metadata"></audio>
+            <a id="downloadBtn" class="primary-button" href="#" download>
+              <i data-lucide="download" aria-hidden="true"></i>
+              <span>下载 MP3</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div id="errorBox" class="error-box" role="alert" hidden></div>
+    </main>
+  </div>
+
+  <script src="lucide.min.js"></script>
+  <script src="lame.all.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
